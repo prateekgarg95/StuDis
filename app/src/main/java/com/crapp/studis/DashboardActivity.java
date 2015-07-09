@@ -4,11 +4,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.ImageView;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,6 +29,12 @@ public class DashboardActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
 
     private ClassroomRecyclerViewAdapter classroomRecyclerViewAdapter;
+
+    private Toolbar toolbar;
+
+    private CollapsingToolbarLayout collapsingToolbar;
+
+    private int mutedColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +78,20 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void setupToolbar(){
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_dashboard);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle("Dashboard");
+        ImageView backdrop = (ImageView) findViewById(R.id.backdrop);
+        collapsingToolbar.setContentScrimColor(DashboardActivity.this.getResources().getColor(R.color.classroom_blue));
+
+        /*Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.backdrop_blue);
+        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+            @Override
+            public void onGenerated(Palette palette) {
+                mutedColor = palette.getMutedColor(R.attr.colorPrimary);
+                collapsingToolbar.setContentScrimColor(mutedColor);
+            }
+        });*/
     }
 }
