@@ -5,12 +5,14 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.widget.ImageView;
 
 import java.io.File;
@@ -42,6 +44,7 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         setupToolbar();
+        setupCollapsingToolbar();
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.default_classroom_image);
         String imageDirectory = Environment.getExternalStorageDirectory().getPath() + "/TestApp";
@@ -80,6 +83,13 @@ public class DashboardActivity extends AppCompatActivity {
     private void setupToolbar(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        final ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+        ab.setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    private void setupCollapsingToolbar(){
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle("Dashboard");
         ImageView backdrop = (ImageView) findViewById(R.id.backdrop);
@@ -93,5 +103,15 @@ public class DashboardActivity extends AppCompatActivity {
                 collapsingToolbar.setContentScrimColor(mutedColor);
             }
         });*/
+
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_dashboard, menu);
+        return true;
+    }
+
+
 }
