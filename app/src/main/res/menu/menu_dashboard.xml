@@ -4,10 +4,4 @@
     tools:context="com.crapp.studis.DashboardActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
-    <item
-        android:id="@+id/action_add_classroom"
-        android:orderInCategory="101"
-        android:title="Add Classroom"
-        android:icon="@drawable/ic_plus"
-        app:showAsAction="always"/>
 </menu>
