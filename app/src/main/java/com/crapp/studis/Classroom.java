@@ -42,7 +42,7 @@ public class Classroom {
         String formattedDate = dateFormat.format(calendar.getTime());
         this.createdAt=formattedDate;
         this.lastUpdateAt=formattedDate;
-        this.classroomImagePath = Environment.getExternalStorageDirectory().getPath() + "/TestApp/defaultClassroomImage.png";
+        this.classroomImagePath = Environment.getExternalStorageDirectory().getPath() + "/Studis/defaultClassroomImage.png";
         this.classroomServerID = randomString(7);
     }
 

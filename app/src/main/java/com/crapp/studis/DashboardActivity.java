@@ -1,10 +1,12 @@
 package com.crapp.studis;
 
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -47,13 +49,15 @@ public class DashboardActivity extends AppCompatActivity {
 
     private TextView txtName,txtEmail;
 
+    private FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.default_classroom_image);
-        String imageDirectory = Environment.getExternalStorageDirectory().getPath() + "/TestApp";
+        String imageDirectory = Environment.getExternalStorageDirectory().getPath() + "/Studis";
         File directory = new File(imageDirectory);
         directory.mkdirs();
         File file = new File(imageDirectory,"defaultClassroomImage.png");
@@ -86,6 +90,14 @@ public class DashboardActivity extends AppCompatActivity {
 
         classroomRecyclerViewAdapter = new ClassroomRecyclerViewAdapter(classroomList);
         recyclerView.setAdapter(classroomRecyclerViewAdapter);
+
+        fab=(FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DashboardActivity.this,"FAB",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setupNavigationView(){
@@ -110,6 +122,8 @@ public class DashboardActivity extends AppCompatActivity {
                 else menuItem.setChecked(true);
                 drawerLayout.closeDrawers();
                 switch (menuItem.getItemId()) {
+                    case R.id.dashboard:
+                        return true;
                     case R.id.profile:
                         Toast.makeText(DashboardActivity.this, "Profile", Toast.LENGTH_SHORT).show();
                         return true;
@@ -124,10 +138,13 @@ public class DashboardActivity extends AppCompatActivity {
         });
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+        SharedPreferences prefs = getSharedPreferences("USER",MODE_PRIVATE);
+
+
         txtName = (TextView)findViewById(R.id.name_nav);
-        txtName.setText("Prateek Garg");
+        txtName.setText(prefs.getString("NAME","Unknown"));
         txtEmail = (TextView)findViewById(R.id.email_nav);
-        txtEmail.setText("prateekgarg95@gmail.com");
+        txtEmail.setText(prefs.getString("EMAIL","Unknown"));
 
     }
 

@@ -12,5 +12,6 @@
     <color name="my_icons">#FFFFFF</color>
     <color name="my_divider">#B6B6B6</color>
     <color name="classroom_blue">#3399FF</color>
+    <color name="classroom_blue_dark">#1F5C99</color>
 
 </resources>
